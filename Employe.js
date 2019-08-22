@@ -28,82 +28,116 @@
 // Ecrire un programme de test pour la classe Employé.
 
 export default class Employe {
+
+
+// Private attributes -> _ underscore is a convention in es6
+  _matricule;
+  _nom;
+  _prenom;
+  _dateNaissance;
+  _dateEmbauche;
+  _salaire;
+
+  //constructeur whith parameters 
   constructor(matricule, nom, prenom, dateNaissance, dateEmbauche, salaire) {
-    this.matricule = matricule;
-    this.nom = nom;
-    this.prenom = prenom;
-    this.dateNaissance = dateNaissance;
-    this.dateEmbauche = dateEmbauche;
-    this.salaire = salaire;
+    this._matricule = matricule;
+    this._nom = nom;
+    this._prenom = prenom;
+    this._dateNaissance = dateNaissance;
+    this._dateEmbauche = dateEmbauche;
+    this._salaire = salaire;
+  }
+
+  // Getter and Setter for call attributes or set attributs of instances of class
+  getDateNaissance() {
+    return this._dateNaissance;
+  }
+
+  setDateNaissance(date) {
+    this._dateNaissance = date;
+  }
+
+  getMatricule() {
+    return this._matricule;
+  }
+
+  setMatricule(number) {
+    this._matricule = number;
+  }
+
+  getNom() {
+    return this._nom;
+  }
+
+  setNom(nom) {
+    this._nom = name;
+  }
+
+  getPrenom() {
+    return this._prenom;
+  }
+
+  setPrenom(prenom) {
+    this._prenom = prenom;
   }
 
   getDateNaissance() {
-    return this.dateNaissance;
+    return this._dateNaissance;
   }
-  setDateNaissance(date) {
-    this.dateNaissance = date;
-  }
-  getMatricule() {
-    return this.matricule;
-  }
-  setMatricule(number) {
-    this.matricule = number;
-  }
-  getNom() {
-    return this.nom;
-  }
-  setNom(name) {
-    this.nom = name;
-  }
-  getPrenom() {
-    return this.prenom;
-  }
-  setPrenom(prenom) {
-    this.prenom = prenom;
-  }
-  getDateNaissance() {
-    return this.dateNaissance;
-  }
+
   setDateNaissance(dateN) {
-    this.dateNaissance = dateN;
+    this._dateNaissance = dateN;
   }
+
   getDateEmbauche() {
-    return this.dateEmbauche;
+    return this._dateEmbauche;
   }
+
   setDateEmbauche(dateE) {
-    this.dateEmbauche = dateE;
+    this._dateEmbauche = dateE;
   }
+
   getSalaire() {
-    return this.salaire;
+    return this._salaire;
   }
+
   setSalaire(numberS) {
-    this.salaire = numberS;
+    this._salaire = numberS;
+  }
+
+  _calculeYears(dateString)
+  {
+    var today = new Date();
+    var date = new Date(dateString);
+    var years = today.getFullYear() - date.getFullYear();
+    console.log(years)
+    var m = today.getMonth() - date.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < date.getDate())) {
+      years--;
+    }
+    return years;
   }
 
   age() {
-    let now = new Date();
-    let date = new Date(this.dateNaissance);
-    return now.getFullYear() - date.getFullYear();
+    return this._calculeYears(this._dateNaissance);
   }
+
   anciennete() {
-    let now = new Date();
-    let year = now.getFullYear();
-    let date = new Date(this.dateEmbauche);
-    return now.getFullYear() - date.getFullYear();
+    return this._calculeYears(this._dateEmbauche);
   }
 
   augmentationDuSalaire() {
     if (this.anciennete < 5) {
-      this.salaire = this.salaire + (2 / 100) * this.salaire;
+      this.salaire += (2 / 100) * this.salaire;
     } else if (this.anciennete < 10) {
-      this.salaire = this.salaire + (5 / 100) * this.salaire;
+      this.salaire += (5 / 100) * this.salaire;
     } else {
-      this.salaire = this.salaire + (10 / 100) * this.salaire;
+      this.salaire += (10 / 100) * this.salaire;
     }
   }
+
   afficherEmploye(div) {
     let affichage = document.getElementById(div);
-    affichage.append('Matricule:' + this.matricule)
-    
+    affichage.append('Matricule:' + this._matricule);
   }
 }
